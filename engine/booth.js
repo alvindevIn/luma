@@ -902,7 +902,7 @@ function buildStrip() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 4000); // Batas nunggu 4 detik
 
-      const response = await fetch('https://6f6a-140-0-49-120.ngrok-free/upload', {
+      const response = await fetch('https://6f6a-140-0-49-120.ngrok-free.app/upload', {
         method: 'POST',
         body: formData,
         signal: controller.signal
