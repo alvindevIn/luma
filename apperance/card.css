@@ -1,0 +1,233 @@
+/* ════════════════════════════════════════
+   LUMA — card.css  (template cards)
+════════════════════════════════════════ */
+
+/* ── CARD ───────────────────────────────── */
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tpl-card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--cream);
+  border: 1px solid rgba(26,22,18,.09);
+  cursor: pointer;
+  animation: card-in .4s ease-out both;
+  transition: transform .2s, border-color .2s, box-shadow .2s;
+}
+.tpl-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(200,80,42,.3);
+  box-shadow: 0 12px 32px rgba(26,22,18,.1);
+}
+.tpl-card.is-premium {
+  opacity: .7;
+  pointer-events: none; /* lock premium */
+}
+
+/* ── PREVIEW WRAP ──────────────────────── */
+.card-preview-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── STRIP ──────────────────────────────── */
+.tpl-strip {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.tpl-slots-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+/* ── SLOTS ──────────────────────────────── */
+.tpl-slot {
+  width: 100%;
+  /* height driven by aspect ratio of slot content */
+  aspect-ratio: 4/3;
+  position: relative;
+  overflow: hidden;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+/* axis hint — small corner indicator */
+.slot-axis-indicator {
+  position: absolute;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.35);
+  pointer-events: none;
+}
+.slot-axis-indicator[data-axis="top"]    { top: 5px; left: 50%; transform: translateX(-50%); }
+.slot-axis-indicator[data-axis="bottom"] { bottom: 5px; left: 50%; transform: translateX(-50%); }
+.slot-axis-indicator[data-axis="left"]   { left: 5px; top: 50%; transform: translateY(-50%); }
+.slot-axis-indicator[data-axis="right"]  { right: 5px; top: 50%; transform: translateY(-50%); }
+.slot-axis-indicator[data-axis="center"] { top: 50%; left: 50%; transform: translate(-50%,-50%); }
+
+.slot-tint {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ── LABEL ──────────────────────────────── */
+.tpl-label {
+  text-align: center;
+  padding: 5px 8px 2px;
+  font-size: 9px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  position: relative; z-index: 2;
+  flex-shrink: 0;
+}
+.tpl-label--serif { font-family: 'Playfair Display', serif; text-transform: none; font-size: 10px; font-style: italic; }
+.tpl-label--mono  { font-family: 'DM Mono', monospace; }
+.tpl-label--sans  { font-family: 'DM Sans', sans-serif; }
+.tpl-label--xs    { font-size: 8px; }
+.tpl-label--sm    { font-size: 10px; }
+.tpl-label--md    { font-size: 12px; }
+
+/* ── TEXTURES ───────────────────────────── */
+.frame-texture {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+}
+.frame-texture--grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  background-size: 150px;
+  opacity: .5;
+  mix-blend-mode: overlay;
+}
+.frame-texture--paper {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 100px;
+  opacity: .4;
+  mix-blend-mode: multiply;
+}
+
+/* ── BADGES ─────────────────────────────── */
+.card-badges {
+  position: absolute;
+  top: 8px; left: 8px;
+  display: flex; gap: 4px; flex-wrap: wrap;
+  z-index: 5;
+}
+.badge {
+  font-size: 9px; font-weight: 500;
+  padding: 3px 7px; border-radius: 4px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: .04em; line-height: 1;
+}
+.badge--hot     { background: var(--red); color: #FDF5EC; }
+.badge--new     { background: rgba(61,90,128,.9); color: #c8e0ff; }
+.badge--premium { background: rgba(212,169,106,.9); color: #2a1a04; }
+
+/* ── PREMIUM LOCK ──────────────────────── */
+.premium-lock {
+  position: absolute; top: 8px; right: 8px; z-index: 5;
+  background: rgba(0,0,0,.45);
+  color: rgba(255,255,255,.7);
+  border-radius: 6px;
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ── HOVER OVERLAY ──────────────────────── */
+.card-hover-overlay {
+  position: absolute; inset: 0;
+  background: rgba(26,22,18,.55);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transition: opacity .18s;
+  z-index: 10;
+}
+.tpl-card:not(.is-premium):hover .card-hover-overlay { opacity: 1; }
+
+.pick-btn {
+  font-size: 12px; font-weight: 500;
+  padding: 9px 18px; border-radius: 100px;
+  background: var(--red); color: #FDF5EC;
+  border: none; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: opacity .13s, transform .08s;
+  white-space: nowrap;
+}
+.pick-btn:hover  { opacity: .9; }
+.pick-btn:active { transform: scale(.97); }
+
+/* ── CARD META ──────────────────────────── */
+.card-meta {
+  padding: 10px 10px 11px;
+  border-top: 1px solid rgba(26,22,18,.07);
+}
+.card-meta-top {
+  display: flex; align-items: baseline;
+  justify-content: space-between; gap: 6px;
+  margin-bottom: 4px;
+}
+.card-name {
+  font-size: 13px; font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  min-width: 0;
+}
+.card-id {
+  font-size: 9px; font-family: 'DM Mono', monospace;
+  color: var(--muted); opacity: .6;
+  flex-shrink: 0;
+}
+.card-meta-bottom {
+  display: flex; align-items: center; gap: 6px;
+  margin-bottom: 7px;
+}
+.card-genre {
+  font-size: 10px; font-family: 'DM Mono', monospace;
+  background: rgba(26,22,18,.06);
+  color: var(--muted);
+  padding: 2px 7px; border-radius: 4px;
+  text-transform: uppercase; letter-spacing: .05em;
+}
+.card-poses {
+  font-size: 11px; color: var(--muted);
+}
+.card-meta-bottom .card-poses::before {
+  content: '·';
+  margin-right: 6px;
+  opacity: .4;
+}
+
+/* ── TAGS ───────────────────────────────── */
+.card-tags {
+  display: flex; gap: 4px; flex-wrap: wrap;
+}
+.tag {
+  font-size: 10px; font-family: 'DM Mono', monospace;
+  color: rgba(122,110,99,.7);
+  background: rgba(26,22,18,.04);
+  padding: 2px 6px; border-radius: 4px;
+  letter-spacing: .03em;
+}
+
+/* ── RESPONSIVE CARD ──────────────────────*/
+@media (max-width: 600px) {
+  .tpl-card { border-radius: 11px; }
+  .card-name { font-size: 12px; }
+  .card-meta { padding: 8px 8px 9px; }
+  .card-tags  { display: none; } /* hide tags on small screens */
+}
+@media (max-width: 380px) {
+  .card-meta { padding: 7px 7px 8px; }
+  .card-name { font-size: 11px; }
+  .card-id   { display: none; }
+  .genre-tab { font-size: 11px; }
+}

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LUMA — Moments worth keeping.</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="apperance/main.css">
+  <link rel="stylesheet" href="apperance/layout.css">
+  <link rel="stylesheet" href="apperance/card.css">
+</head>
+<body>
+
+<!-- ─── NAVBAR ─────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="#">LUMA</a>
+
+  <div class="nav-links">
+      <a class="nav-link" href="gallery.html">Gallery</a>
+      <a class="nav-link active" href="#start">Home</a>
+    <a class="nav-link" href="#about">About</a>
+  </div>
+
+  <button class="nav-cta">Download App</button>
+</nav>
+
+<!-- ─── HERO ──────────────────────────── -->
+<section class="hero" id="start">
+
+  <!-- floating cards -->
+  <div class="float-card fc-1" id="fc1">
+    <div class="card-inner" id="fci1">
+      <div class="strip-preview"></div>
+      <div class="strip-label" id="fcl1">Darkroom</div>
+    </div>
+  </div>
+
+  <div class="float-card fc-2" id="fc2">
+    <div class="card-inner" id="fci2">
+      <div class="strip-preview"></div>
+      <div class="strip-label" id="fcl2">Kodak Tone</div>
+    </div>
+  </div>
+
+  <div class="float-card fc-3" id="fc3">
+    <div class="card-inner" id="fci3">
+      <div class="strip-preview"></div>
+      <div class="strip-label" id="fcl3">Blueprint</div>
+    </div>
+  </div>
+
+  <div class="float-card fc-4" id="fc4">
+    <div class="card-inner" id="fci4">
+      <div class="strip-preview"></div>
+      <div class="strip-label" id="fcl4">Noir Rouge</div>
+    </div>
+  </div>
+
+  <!-- main content -->
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      Photo Booth Web &middot; Gratis &middot; No Login
+    </div>
+
+    <h1 class="hero-title">LUMA</h1>
+
+    <p class="hero-tagline">
+      Moments worth keeping.
+    </p>
+
+    <p class="hero-sub">
+      Pilih template, ambil foto bareng, download strip-mu dalam 60 detik.
+      Tidak perlu daftar. Langsung aesthetic.
+    </p>
+
+    <div class="hero-actions">
+      <button
+        class="btn-primary"
+        onclick="window.location.href='gallery.html'"
+      >
+        Mulai Sekarang
+      </button>
+
+      <button
+        class="btn-ghost"
+        onclick="document.getElementById('about-section').scrollIntoView({behavior:'smooth'})"
+      >
+        Lihat Contoh
+      </button>
+    </div>
+
+    <div class="hero-stats">
+      <span>Gratis selamanya</span>
+      <span class="h-dot"></span>
+      <span>20+ template</span>
+      <span class="h-dot"></span>
+      <span>Instan &amp; ringan</span>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ─── DARK / GALLERY SECTION ─────────── -->
+<section class="dark-section" id="gallery-section">
+
+  <div class="section-header">
+    <span class="section-title-dark">Template Terpopuler</span>
+    <span class="section-badge">Most Used</span>
+  </div>
+
+  <div class="cards-row" id="cardsRow"></div>
+
+</section>
+
+<!-- ─── FOOTER ────────────────────────── -->
+<footer id="about-section">
+
+  <div class="footer-grid">
+
+    <div>
+      <div class="footer-logo">LUMA</div>
+
+      <div class="footer-tagline">
+        Moments worth keeping.
+      </div>
+
+      <div class="footer-copy">
+        &copy;2025 LUMA &nbsp;&middot;&nbsp; Snapframe Studio
+      </div>
+    </div>
+
+    <div id="tutorial">
+      <div class="footer-col-title">Cara Pakai</div>
+
+      <div class="footer-links">
+        <a class="footer-link" href="#">Pilih template favoritmu</a>
+        <a class="footer-link" href="#">Ambil 3–4 foto via kamera</a>
+        <a class="footer-link" href="#">Preview &amp; edit strip</a>
+        <a class="footer-link" href="#">Download &amp; share</a>
+      </div>
+    </div>
+
+    <div id="about">
+
+      <div class="footer-col-title">Mailing List</div>
+
+      <p
+        style="
+          font-size:12px;
+          color:rgba(245,239,230,.35);
+          margin-bottom:12px;
+          line-height:1.6;
+        "
+      >
+        Dapat info template baru &amp; update fitur langsung ke inbox-mu.
+      </p>
+
+      <div class="footer-email">
+        <input
+          class="footer-input"
+          type="email"
+          placeholder="Email kamu..."
+        >
+
+        <button class="footer-email-btn">→</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+
+    <div class="footer-bottom-left">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Template License</a>
+    </div>
+
+    <div class="footer-social">
+      <a class="social-btn" href="#" aria-label="Instagram" title="Instagram">
+        IG
+      </a>
+
+      <a class="social-btn" href="#" aria-label="TikTok" title="TikTok">
+        TK
+      </a>
+
+      <a class="social-btn" href="#" aria-label="Twitter/X" title="Twitter/X">
+        𝕏
+      </a>
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- JS -->
+<script src="engine/main.js"></script>
+<script src="engine/card.js"></script>
+
+</body>
+</html>

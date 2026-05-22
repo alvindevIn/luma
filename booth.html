@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booth — LUMA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="apperance/main.css">
+  <link rel="stylesheet" href="apperance/booth.css">
+  <style>
+    @keyframes cd-pulse {
+      0%,100% { transform:scale(1); }
+      40%      { transform:scale(1.14); }
+    }
+  </style>
+</head>
+<body class="booth-page">
+
+<!-- ═══════ NAVBAR ════════════════════════ -->
+<nav>
+  <a class="nav-logo" href="index.html">LUMA</a>
+  <div class="nav-links">
+    <a class="nav-link active" href="gallery.html">Start</a>
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="index.html#footer-about">About</a>
+  </div>
+  <button class="nav-cta">Download App</button>
+</nav>
+
+<!-- ═══════ TOP BAR ══════════════════════ -->
+<div class="booth-topbar">
+
+  <!-- back + template name -->
+  <a class="booth-back-pill" href="gallery.html">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <span id="booth-tpl-name" class="tpl-pill-name">Template</span>
+  </a>
+
+  <!-- countdown selector -->
+  <div class="cd-group">
+    <span class="cd-label">Timer</span>
+    <button class="cd-btn active" data-secs="3">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      3s
+    </button>
+    <button class="cd-btn" data-secs="5">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      5s
+    </button>
+    <button class="cd-btn" data-secs="10">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      10s
+    </button>
+  </div>
+
+  <!-- upload -->
+  <label class="upload-btn">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+    Unggah Foto
+    <input id="upload-input" type="file" accept="image/*" multiple>
+  </label>
+</div>
+
+<!-- ═══════ MAIN 2-PANEL LAYOUT ══════════ -->
+<div class="booth-body">
+
+  <!-- ════ LEFT: camera panel ════════════ -->
+  <div class="cam-panel">
+
+    <!-- tool row -->
+    <div class="cam-tools">
+      <button class="tool-btn" id="grid-tool" title="Toggle kisi">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+          <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+          <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+          <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+        </svg>
+        <span class="tool-label">Kisi</span>
+      </button>
+
+      <button class="tool-btn" id="flip-btn" title="Flip kamera">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M1 4v6h6"/><path d="M23 20v-6h-6"/>
+          <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/>
+        </svg>
+        <span class="tool-label">Balik</span>
+      </button>
+
+      <div style="flex:1"></div>
+
+      <span style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:.05em;align-self:center;" id="cam-status-label">
+        Tekan Spasi atau tombol kamera ↓
+      </span>
+    </div>
+
+    <!-- viewfinder -->
+    <div class="viewfinder-wrap">
+      <video id="cam-video" autoplay playsinline muted></video>
+
+      <!-- grid lines -->
+      <div class="cam-grid" id="cam-grid">
+        <div class="cg v"></div><div class="cg v"></div>
+        <div class="cg h"></div><div class="cg h"></div>
+      </div>
+
+      <!-- flash -->
+      <div class="cam-flash" id="cam-flash"></div>
+
+      <!-- countdown overlay -->
+      <div class="cd-overlay" id="cd-overlay">
+        <div class="cd-ring-wrap">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <circle class="cd-ring-bg" cx="50" cy="50" r="40"/>
+            <circle class="cd-ring-arc" id="cd-arc" cx="50" cy="50" r="40"
+              stroke-dasharray="251.33" stroke-dashoffset="0"/>
+          </svg>
+          <div class="cd-num" id="cd-num">3</div>
+        </div>
+      </div>
+
+      <!-- camera error -->
+      <div class="cam-error" id="cam-error">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="1.4" stroke-linecap="round">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+          <line x1="2" y1="2" x2="22" y2="22"/>
+        </svg>
+        <p>Akses kamera ditolak atau tidak tersedia.<br>Aktifkan izin kamera, atau unggah foto manual.</p>
+        <button class="cam-retry" id="cam-retry">Coba Lagi</button>
+      </div>
+    </div><!-- /viewfinder-wrap -->
+
+    <!-- capture bar -->
+    <div class="capture-bar">
+      <!-- retake last -->
+      <button class="cap-side-btn hidden" id="retake-btn" title="Ulang foto terakhir">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <polyline points="1 4 1 10 7 10"/>
+          <path d="M3.51 15a9 9 0 1 0 .49-3.67"/>
+        </svg>
+      </button>
+
+      <!-- SHUTTER -->
+      <button class="shutter-btn" id="shutter-btn" aria-label="Ambil foto">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+          <circle cx="12" cy="13" r="4"/>
+        </svg>
+      </button>
+
+      <!-- flip (secondary) -->
+      <button class="cap-side-btn" id="flip-btn2" title="Flip kamera">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M11 19H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/><path d="M13 5h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-5"/>
+          <polyline points="9 10 12 7 15 10"/><line x1="12" y1="7" x2="12" y2="17"/>
+        </svg>
+      </button>
+    </div>
+
+    <p class="cap-hint">Klik slot foto di kanan untuk mengulang pose tersebut</p>
+
+  </div><!-- /cam-panel -->
+
+  <!-- ════ RIGHT: template preview panel ═ -->
+  <div class="tpl-panel">
+
+    <div class="tpl-panel-title">Preview Template</div>
+
+    <!-- strip container -->
+    <div class="tpl-strip-preview">
+      <div class="tpl-strip-bg" id="tpl-strip-bg">
+        <!-- slots injected by JS -->
+      </div>
+      <div class="tpl-strip-label" id="tpl-strip-label"></div>
+    </div>
+
+    <!-- continue CTA -->
+    <button class="continue-btn" id="continue-btn">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+      </svg>
+      Edit &amp; Simpan Strip
+    </button>
+
+  </div><!-- /tpl-panel -->
+
+</div><!-- /booth-body -->
+
+<!-- ═══════ EDIT OVERLAY ══════════════════ -->
+<div class="edit-overlay" id="edit-overlay">
+  <button class="edit-close" id="edit-close" aria-label="Tutup">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+
+  <div class="edit-inner">
+
+    <!-- canvas preview -->
+    <div class="edit-strip-wrap">
+      <canvas id="edit-canvas"></canvas>
+    </div>
+
+    <!-- controls -->
+    <div class="edit-controls">
+      <div class="edit-title">Edit Strip</div>
+      <div class="edit-sub">Pilih filter dan sesuaikan intensitasnya. Klik Simpan &amp; Download saat sudah puas.</div>
+
+      <!-- filter chips -->
+      <div class="filter-section-title">Filter</div>
+      <div class="filter-grid" id="filter-grid">
+        <!-- chips injected by JS -->
+      </div>
+
+      <!-- intensity slider -->
+      <div class="slider-section">
+        <div class="slider-row">
+          <span class="slider-label">Intensitas</span>
+          <span class="slider-val" id="intensity-val">70%</span>
+        </div>
+        <input type="range" class="luma-range" id="intensity-slider"
+          min="0" max="100" value="70" style="--pct:70%">
+      </div>
+
+      <!-- actions -->
+      <div class="edit-actions">
+        <button class="edit-save-btn" id="edit-save-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Simpan &amp; Download PNG
+        </button>
+        <button class="edit-back-btn" id="edit-back-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Kembali ke Kamera
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /edit-inner -->
+</div><!-- /edit-overlay -->
+
+<!-- ═══════ TOAST ════════════════════════ -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════ SCRIPTS ══════════════════════ -->
+<script src="engine/templates-db.js"></script>
+<script src="engine/booth.js"></script>
+
+</body>
+</html>

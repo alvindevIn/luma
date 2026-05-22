@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery — LUMA</title>
+  <link rel="stylesheet" href="apperance/main.css">
+  <link rel="stylesheet" href="apperance/layout.css">
+  <link rel="stylesheet" href="apperance/card.css">
+</head>
+<body class="gallery-page">
+
+<!-- ── NAVBAR ─────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="index.html">LUMA</a>
+  <div class="nav-links">
+    <a class="nav-link active" href="gallery.html">Start</a>
+    <a class="nav-link" href="index.html">Home</a>
+    <a class="nav-link" href="#about">About</a>
+  </div>
+  <button class="nav-cta">Download App</button>
+</nav>
+
+<!-- ── GALLERY HEADER (sticky) ──────────── -->
+<div class="gallery-header">
+
+  <div class="gallery-header-top">
+    <!-- title -->
+    <div class="gallery-title-block">
+      <h1>Pilih Templatemu</h1>
+      <p>Setiap template siap pakai — pilih, foto, download.</p>
+    </div>
+
+    <!-- controls -->
+    <div class="gallery-controls">
+      <!-- search -->
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input id="search-input" type="search" placeholder="Cari template…" autocomplete="off" spellcheck="false">
+      </div>
+
+      <!-- sort -->
+      <div class="sort-select-wrap">
+        <select id="sort-select">
+          <option value="default">Urutan default</option>
+          <option value="newest">Terbaru</option>
+          <option value="popular">Terpopuler</option>
+          <option value="poses-asc">Pose: sedikit dulu</option>
+          <option value="poses-desc">Pose: banyak dulu</option>
+        </select>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+
+      <!-- count -->
+      <span id="gallery-count">— template</span>
+    </div>
+  </div>
+
+  <!-- genre tabs — built by JS -->
+  <div class="genre-tabs-wrap">
+    <div id="genre-tabs"></div>
+  </div>
+
+</div>
+
+<!-- ── GRID ─────────────────────────────── -->
+<div class="gallery-body">
+  <div id="tpl-grid">
+    <!-- cards injected by gallery.js -->
+  </div>
+</div>
+
+<!-- ── SCRIPTS ───────────────────────────── -->
+<!-- 1. Database (harus duluan) -->
+<script src="engine/templates-db.js"></script>
+<!-- 2. Renderer -->
+<script src="engine/gallery.js"></script>
+
+</body>
+</html>

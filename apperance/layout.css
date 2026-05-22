@@ -1,0 +1,207 @@
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+.hero{
+  min-height:100vh;
+
+  padding:56px 0 0;
+
+  position:relative;
+  overflow:hidden;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ── PAGE WRAPPER ───────────────────────── */
+.gallery-page {
+  padding-top: 52px;
+  min-height: 100vh;
+}
+
+/* ── HEADER BAND ─────────────────────────── */
+.gallery-header {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding: 28px clamp(20px,5vw,48px) 0;
+  position: sticky; top: 52px; z-index: 100;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(245,239,230,.95);
+}
+
+.gallery-header-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.gallery-title-block h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  letter-spacing: -.5px;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.gallery-title-block p {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 300;
+}
+
+/* search + sort row */
+.gallery-controls {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.search-wrap {
+  position: relative;
+}
+.search-wrap svg {
+  position: absolute; left: 11px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted); pointer-events: none;
+  width: 14px; height: 14px;
+}
+#search-input {
+  width: 200px;
+  padding: 8px 12px 8px 32px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: rgba(26,22,18,.04);
+  font-size: 13px; font-family: 'DM Sans', sans-serif;
+  color: var(--ink); outline: none;
+  transition: border-color .15s, width .25s;
+}
+#search-input::placeholder { color: var(--muted); opacity: .7; }
+#search-input:focus {
+  border-color: rgba(200,80,42,.4);
+  width: 240px;
+  background: rgba(26,22,18,.02);
+}
+
+.sort-select-wrap { position: relative; }
+.sort-select-wrap svg {
+  position: absolute; right: 10px; top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; color: var(--muted);
+  width: 12px; height: 12px;
+}
+#sort-select {
+  padding: 8px 30px 8px 13px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  background: rgba(26,22,18,.04);
+  font-size: 12px; font-family: 'DM Mono', monospace;
+  color: var(--muted); cursor: pointer; outline: none;
+  -webkit-appearance: none; appearance: none;
+  transition: border-color .15s;
+}
+#sort-select:focus { border-color: rgba(200,80,42,.4); }
+
+/* count */
+#gallery-count {
+  font-size: 12px; color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  background: rgba(26,22,18,.05);
+  padding: 7px 13px; border-radius: 100px;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+/* ── GENRE TABS ─────────────────────────── */
+.genre-tabs-wrap {
+  overflow-x: auto; scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.genre-tabs-wrap::-webkit-scrollbar { display: none; }
+#genre-tabs {
+  display: flex; gap: 0; padding-bottom: 0;
+}
+.genre-tab {
+  flex-shrink: 0;
+  padding: 9px 16px;
+  font-size: 13px; font-weight: 500;
+  color: var(--muted); cursor: pointer;
+  border: none; background: transparent;
+  border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s;
+  white-space: nowrap;
+  font-family: 'DM Sans', sans-serif;
+  display: flex; align-items: center; gap: 5px;
+}
+.genre-tab:hover { color: var(--ink); }
+.genre-tab.active { color: var(--red); border-bottom-color: var(--red); }
+.genre-count {
+  font-size: 10px; font-family: 'DM Mono', monospace;
+  background: rgba(26,22,18,.07);
+  padding: 2px 6px; border-radius: 100px;
+  color: var(--muted);
+}
+.genre-tab.active .genre-count {
+  background: rgba(200,80,42,.12);
+  color: var(--red);
+}
+
+/* ── GRID SECTION ───────────────────────── */
+.gallery-body {
+  padding: 28px clamp(20px,5vw,48px);
+}
+
+/* masonry-ish grid */
+#tpl-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+/* ── EMPTY STATE ────────────────────────── */
+.grid-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 20px;
+}
+.grid-empty-icon  { font-size: 40px; margin-bottom: 12px; }
+.grid-empty-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.grid-empty-sub   { font-size: 13px; color: var(--muted); }
+
+/* ── RESPONSIVE ─────────────────────────── */
+@media (min-width: 1400px) {
+  #tpl-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+}
+@media (max-width: 900px) {
+  #tpl-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+  #search-input { width: 170px; }
+  #search-input:focus { width: 200px; }
+}
+@media (max-width: 600px) {
+  .gallery-header { padding: 20px 16px 0; top: 48px; }
+  .gallery-header-top { margin-bottom: 14px; }
+  .gallery-title-block h1 { font-size: 20px; }
+  .gallery-controls { gap: 7px; }
+  #search-input { width: 140px; font-size: 12px; }
+  #search-input:focus { width: 165px; }
+  #sort-select { font-size: 11px; }
+  #gallery-count { font-size: 11px; padding: 6px 10px; }
+  .genre-tab { font-size: 12px; padding: 8px 12px; }
+  .gallery-body { padding: 20px 16px; }
+  #tpl-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+}
+@media (max-width: 380px) {
+  #tpl-grid { grid-template-columns: repeat(2, 1fr); gap: 9px; }
+  #search-input { width: 120px; }
+  #search-input:focus { width: 140px; }
+  .gallery-controls { gap: 6px; }
+}
