@@ -605,7 +605,7 @@ function buildStrip() {
   }
 
   /* returns Promise (waits for image loads) */
-  function renderCanvas(ctx, scale) {
+    function renderCanvas(ctx, scale) {
     const s = scale || 1;
     const w = C_W * s, h = C_H * s;
 
